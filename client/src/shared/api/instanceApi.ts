@@ -10,17 +10,18 @@ export const jsonApiInstance = async <T>(
   url: string,
   init?: RequestInit & { json?: unknown },
 ): Promise<T> => {
+    const requestInit: RequestInit = { ...init }; 
   let headers = init?.headers ?? {};
   if (init?.json) {
     headers = {
       ...headers,
       'Content-Type': 'application/json',
     };
-    init.body = JSON.stringify(init.json);
+    requestInit.body = JSON.stringify(init.json);
   }
 
   const result = await fetch(`${BASE_URL}${url}`, {
-    ...init,
+    ...requestInit,
     headers,
   });
 
