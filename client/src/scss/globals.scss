@@ -1,0 +1,57 @@
+@use "helpers" as *;
+
+a,
+button,
+label,
+input,
+textarea,
+select,
+svg * {
+    transition-duration: var(--transition-duration);
+}
+
+a {
+    color: inherit;
+
+    @include hover {
+        color: var(--color-blue);
+    }
+
+    &[class] {
+        text-decoration: none;
+    }
+    
+    &.is-active {
+        color: var(--color-blue-light);
+        pointer-events: none;
+    }
+}
+
+:focus-visible {
+    outline: rem(2) dashed var(--color-blue);
+    outline-offset: rem(4);
+    transition-duration: 0s !important;
+}
+
+main {
+    flex-grow: 1;
+}
+
+body {
+    @include fluid-text(24, 16);
+
+    display: flex;
+    flex-direction: column;
+    font-family: var(--font-family-base);
+    letter-spacing: 0%;
+    line-height: 1.2;
+    color: var(--color-dark);
+    background-color: var(--bgc);
+    position: relative;
+}
+
+html {
+    &.locked {
+        overflow: hidden;
+    }
+}

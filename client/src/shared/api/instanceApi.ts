@@ -10,7 +10,7 @@ export const jsonApiInstance = async <T>(
   url: string,
   init?: RequestInit & { json?: unknown },
 ): Promise<T> => {
-    const requestInit: RequestInit = { ...init }; 
+  const requestInit: RequestInit = { ...init };
   let headers = init?.headers ?? {};
   if (init?.json) {
     headers = {

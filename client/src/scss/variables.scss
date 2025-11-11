@@ -1,0 +1,21 @@
+@use './helpers' as *;
+
+:root {
+    --bgc: #F6F6F6;
+    --color-blue: #091D9E;
+    --color-blue-light: #BCC5FF;
+    --color-dark: #0C0C0C;
+    --color-gray: #C1C1C1;
+    --color-purple: #750DC5;
+    --color-yellow: #EBBA1A;
+
+    --logo-gradient: linear-gradient(to right, #260DC1, #59006F);
+
+    --font-family-base: 'Roboto', sans-serif;
+    --font-family-accent: 'DisketMono', sans-serif;
+
+    --container-width: #{rem(1280)};
+    --container-padding-x: #{rem(16)};
+
+    --transition-duration: 0.3s;
+}
