@@ -1,7 +1,16 @@
+import { BrowserRouter, Route, Routes } from 'react-router';
+import Home from './modules/Home/Home';
+import Header from './components/layout/Header/Header';
+
 function App() {
   return (
-    <>app</>
-  )
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route index path="/" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

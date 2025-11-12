@@ -1,0 +1,45 @@
+@use '../../../scss/helpers' as *;
+
+:root {
+    --inputBgColor: #DEDEDE;
+}
+
+.overlay {
+    flex: 0 0 600px;
+}
+
+.search {
+    background-color: var(--inputBgColor);
+    color: var(--color-dark);
+    border: none;
+    padding: rem(12) rem(16);
+    border-radius: rem(8);
+    width: 100%;
+    padding-left: rem(32);
+
+    &::placeholder {
+        color: var(--color-dark);
+    }
+}
+
+.fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.form {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.icon {
+    position: absolute;
+    top: 50%;
+    left: rem(8);
+    transform: translateY(-50%);
+    width: rem(16);
+    height: rem(16);
+}

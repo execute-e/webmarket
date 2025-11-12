@@ -1,10 +1,17 @@
 {
-  "files": [],
-  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
   "compilerOptions": {
-    "baseUrl": ".",
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "baseUrl": "./src",
     "paths": {
-      "@/*": ["client/src/*"]
-    }
+      "@/*": ["*"]
+    },
+    "types": ["vite/client"]
   },
+  "include": ["src", "src/global.d.ts", "src/vite-env.d.ts"]
 }
