@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const { initializeDatabase} = require("./model");
+const userRouter = require("./user/user-router")
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -18,6 +19,8 @@ app.use(cors({
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
+
+app.use("/api", userRouter);
 
 const start = async () => {
     try {
