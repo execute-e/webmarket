@@ -6,6 +6,14 @@
 
 .overlay {
     flex: 0 0 600px;
+
+    @include tablet {
+        flex: 0 0 rem(400);
+    }
+
+    @include mobile-l {
+        flex: auto;
+    }
 }
 
 .search {
@@ -16,6 +24,7 @@
     border-radius: rem(8);
     width: 100%;
     padding-left: rem(32);
+    font-size: rem(16);
 
     &::placeholder {
         color: var(--color-dark);
@@ -37,9 +46,18 @@
 
 .icon {
     position: absolute;
-    top: 50%;
+    top: 0;
+    bottom: 0;
     left: rem(8);
-    transform: translateY(-50%);
     width: rem(16);
-    height: rem(16);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+
+    @include hover {
+        color: var(--color-blue);
+    }
 }

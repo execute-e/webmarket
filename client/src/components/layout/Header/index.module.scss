@@ -4,4 +4,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-block: rem(17);
+
+    @include mobile-l {
+        flex-direction: column;
+        justify-content: start;
+        row-gap: rem(24);
+    }
 }

@@ -1,0 +1,42 @@
+@use '../../../scss/helpers' as *;
+
+.nav {
+    font-size: rem(14);
+
+    @include mobile-l {
+        &[data-type="desktop"] {
+            display: none;
+        }
+        &[data-type="mobile"] {
+            width: 100%;
+        }
+    }
+}
+
+.list {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    column-gap: rem(10);
+}
+
+.link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    row-gap: rem(8);
+
+    &.active {
+        opacity: 0.5;
+        pointer-events: none;
+        cursor: default;
+
+    }
+}
+
+.icon {
+    width: rem(20);
+    height: rem(20);
+}
