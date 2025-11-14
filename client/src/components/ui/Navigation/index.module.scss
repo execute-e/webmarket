@@ -1,42 +1,52 @@
 @use '../../../scss/helpers' as *;
 
 .nav {
-    font-size: rem(14);
+  font-size: rem(14);
 
-    @include mobile-l {
-        &[data-type="desktop"] {
-            display: none;
-        }
-        &[data-type="mobile"] {
-            width: 100%;
-        }
+  @include mobile-l-above {
+    &[data-type='mobile'] {
+      display: none;
     }
+  }
+
+  @include mobile-l {
+    &[data-type='desktop'] {
+      display: none;
+    }
+    &[data-type='mobile'] {
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding-block: rem(20);
+    }
+  }
 }
 
 .list {
-    display: flex;
-    align-items: stretch;
-    justify-content: space-between;
-    column-gap: rem(10);
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  column-gap: rem(10);
 }
 
 .link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-    row-gap: rem(8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  row-gap: rem(8);
 
-    &.active {
-        opacity: 0.5;
-        pointer-events: none;
-        cursor: default;
-
-    }
+  &.active {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: default;
+  }
 }
 
 .icon {
-    width: rem(20);
-    height: rem(20);
+  width: rem(20);
+  height: rem(20);
 }

@@ -9,6 +9,7 @@ const Header = () => {
       <Logo />
       <Search />
       <Navigation type='desktop' />
+      <Navigation type='mobile' />
     </header>
   );
 };

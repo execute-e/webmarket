@@ -5,6 +5,7 @@ import { Link, useLocation } from 'react-router';
 import s from './index.module.scss';
 import HomeIcon from './icons/HomeIcon';
 import { useCallback } from 'react';
+import { createPortal } from 'react-dom';
 
 interface IProps {
   type: 'mobile' | 'desktop';
@@ -13,19 +14,20 @@ interface IProps {
 const Navigation = ({ type }: IProps) => {
   const location = useLocation();
 
+  const isMobile = type === 'mobile';
   const isActive = useCallback((path: string) => location.pathname === path, [location.pathname]);
 
-  return (
+  const nav = (
     <nav
       className={s.nav}
       data-type={type}
-      aria-label={type === 'mobile' ? 'Мобильная навигация' : 'Основная навигация'}>
-      <ul className={s.list}>
+      aria-label={isMobile ? 'Мобильная навигация' : 'Основная навигация'}>
+      <ul className={s.list + " " + (isMobile ? "container" : "")}>
         {type === 'mobile' && (
           <li className={s.listItem}>
             <Link
               to="/"
-              className={`${s.link} ${isActive('/profile') ? s.active : ''}`}
+              className={`${s.link} ${isActive('/') ? s.active : ''}`}
               aria-current={isActive('/') ? 'page' : undefined}>
               <HomeIcon className={s.icon} />
               <span>Главная</span>
@@ -62,6 +64,12 @@ const Navigation = ({ type }: IProps) => {
       </ul>
     </nav>
   );
+
+  if (isMobile) {
+    return createPortal(nav, document.body);
+  }
+
+  return nav;
 };
 
 export default Navigation;
