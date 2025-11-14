@@ -85,6 +85,26 @@ const Token = sequelize.define('Token', {
     timestamps: false
 });
 
+const Product = sequelize.define('Product', {
+    id: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4
+    },
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    price: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    }
+})
+
 User.hasMany(Token, { foreignKey: 'userId', onDelete: 'CASCADE' });
 Token.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
 
@@ -173,6 +193,7 @@ module.exports = {
     sequelize,
     User,
     Token,
+    Product,
     initializeDatabase,
     closeDatabase,
     clearDatabase
