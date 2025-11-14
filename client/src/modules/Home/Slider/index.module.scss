@@ -1,0 +1,59 @@
+@use '../../../scss/helpers' as *;
+
+.window {
+    margin-top: rem(40);
+}
+
+.overlay {
+  overflow-x: hidden;
+  position: relative;
+  border-radius: rem(8);
+}
+
+.list {
+  display: flex;
+  column-gap: rem(20);
+  align-items: center;
+  width: 100%;
+}
+
+.item {
+  flex: 0 0 100%;
+  background-color: red;
+  height: rem(260);
+  border-radius: rem(8);
+}
+
+.rightArrow,
+.leftArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: rem(2) var(--color-gray) solid;
+  border-radius: 50%;
+  width: rem(50);
+  height: rem(50);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-gray);
+  background: transparent;
+  z-index: 50;
+
+  @include hover {
+    color: var(--color-blue);
+    border-color: var(--color-blue);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.rightArrow {
+  right: rem(24);
+}
+
+.leftArrow {
+  left: rem(24);
+}
