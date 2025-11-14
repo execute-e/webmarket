@@ -6,6 +6,7 @@
 
 .overlay {
     flex: 0 0 600px;
+    width: 100%;
 
     @include tablet {
         flex: 0 0 rem(400);
@@ -42,6 +43,7 @@
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .icon {
