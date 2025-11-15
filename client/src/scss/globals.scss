@@ -49,10 +49,17 @@ body {
     background-color: var(--bgc);
     position: relative;
     font-weight: 300;
+    overflow-x: hidden;
 }
 
 html {
     &.locked {
         overflow: hidden;
     }
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }

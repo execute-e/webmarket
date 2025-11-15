@@ -10,7 +10,7 @@ export function useInfinitySlider(items: ReactNode[], gap = 20) {
 
   const [index, setIndex] = useState(1);
   const [itemWidth, setItemWidth] = useState(0);
-  const [animate, setAnimate] = useState(true);
+  const [animate, setAnimate] = useState(false);
   const [isLocked, setIsLocked] = useState(false);
 
   const calculateWidth = useCallback(() => {

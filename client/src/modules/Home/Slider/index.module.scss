@@ -1,13 +1,24 @@
 @use '../../../scss/helpers' as *;
 
 .window {
-    margin-top: rem(40);
+  margin-top: rem(40);
+  overflow-x: hidden;
+  overflow-y: visible;
+
+  @include mobile-l {
+    margin-top: rem(10);
+  }
 }
 
 .overlay {
   overflow-x: hidden;
   position: relative;
   border-radius: rem(8);
+
+  @include mobile-l {
+    overflow-x: visible;
+    padding-bottom: rem(50);
+  }
 }
 
 .list {
@@ -18,10 +29,16 @@
 }
 
 .item {
+  background-color: var(--color-dark);
   flex: 0 0 100%;
-  background-color: red;
   height: rem(260);
   border-radius: rem(8);
+  position: relative;
+  z-index: 50;
+
+  @include mobile-l {
+    height: rem(150);
+  }
 }
 
 .rightArrow,
@@ -38,7 +55,20 @@
   align-items: center;
   color: var(--color-gray);
   background: transparent;
-  z-index: 50;
+  z-index: 100;
+
+  @include mobile-l {
+    width: rem(40);
+    height: rem(40);
+    top: initial;
+    bottom: rem(0);
+    color: var(--color-blue);
+    border-color: var(--color-blue);
+
+    @include hover {
+      opacity: 0.5;
+    }
+  }
 
   @include hover {
     color: var(--color-blue);
@@ -52,8 +82,84 @@
 
 .rightArrow {
   right: rem(24);
+
+  @include mobile-l {
+    right: 50%;
+    transform: translateX(110%);
+  }
 }
 
 .leftArrow {
   left: rem(24);
+
+  @include mobile-l {
+    left: 50%;
+    transform: translateX(-110%);
+  }
+}
+
+.element {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding-block: rem(10);
+
+  @include tablet {
+    justify-content: center;
+    column-gap: rem(10);
+  }
+
+  &Text {
+    color: white;
+    font-weight: 400;
+    font-size: rem(32);
+
+    @include laptop {
+      font-size: rem(26);
+    }
+
+    @include tablet {
+      font-size: rem(20);
+    }
+
+    @include mobile-l {
+      font-size: rem(14);
+      width: 30%;
+    }
+  }
+
+  &Desc {
+    margin-bottom: rem(20);
+
+    @include mobile-l {
+      margin-bottom: rem(10);
+    }
+  }
+
+  &Title {
+    color: var(--color-yellow);
+
+    @include mobile-l {
+      @include visually-hidden;
+    }
+  }
+}
+
+.image {
+  width: rem(350);
+  align-self: end;
+
+  @include laptop {
+    width: rem(300);
+  }
+
+  @include tablet {
+    width: rem(250);
+  }
+
+  @include mobile-l {
+    width: rem(150);
+  }
 }

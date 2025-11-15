@@ -6,9 +6,11 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <Routes>
-        <Route index path="/" element={<Home />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route index path="/" element={<Home />} />
+        </Routes>
+      </main>
     </BrowserRouter>
   );
 }

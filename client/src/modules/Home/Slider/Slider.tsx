@@ -1,17 +1,19 @@
 import ArrowButton from '@/components/ui/ArrowButton/ArrowButton';
 import s from './index.module.scss';
 import { useInfinitySlider } from './useInfinitySlider';
+import Picture from '@/utils/Picture';
+import tvPng from './images/tv.png';
+import tvWebp from './images/tv.webp';
 
 const items = [
-  <div>
-    <div>item 1</div>
+  <div className={s.element}>
+    <div className={s.elementText}>
+      <p className={s.elementDesc}>Суперцены на все телевизоры.</p>
+      <h2 className={s.elementTitle}>СКИДКА 20%</h2>
+    </div>
+    <Picture webp={tvWebp} fallback={tvPng} width={400} height={260} alt='Телевизор Samsung' className={s.image} />
   </div>,
-  <div>
-    <div>item 2</div>
-  </div>,
-  <div>
-    <div>item 3</div>
-  </div>,
+
 ];
 
 const Slider = () => {
