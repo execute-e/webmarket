@@ -1,19 +1,17 @@
-import ArrowIcon from "./icons/ArrowIcon";
+import React from 'react';
+import ArrowIcon from './icons/ArrowIcon';
+import s from './index.module.scss';
 
-interface IProps {
-    direction: 'left' | 'right';
-    onClick?: () => void;
-    disabled?: boolean;
-    className?: string;
-    ariaLabel?: string;
+interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  direction: 'left' | 'right';
 }
 
-const ArrowButton = ({direction, onClick, disabled, className, ariaLabel}: IProps) => {
-    return (
-        <button type="button" onClick={onClick} disabled={disabled} className={className} aria-label={ariaLabel}>
-            <ArrowIcon direction={direction}/>
-        </button>
-    );
+const ArrowButton = ({ direction, className, ...props }: IProps) => {
+  return (
+    <button type="button" className={s.button + ' ' + className} {...props}>
+      <ArrowIcon direction={direction} />
+    </button>
+  );
 };
 
-export default ArrowButton;
+export default React.memo(ArrowButton);

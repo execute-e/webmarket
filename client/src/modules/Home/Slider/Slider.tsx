@@ -23,7 +23,7 @@ const Slider = () => {
   return (
     <section className={s.window + ' container'}>
       <div className={s.overlay}>
-        <ArrowButton direction="left" onClick={prev} className={s.leftArrow} />
+        <ArrowButton direction="left" onClick={prev} className={s.leftArrow} aria-label='Предыдущий баннер' />
         <ul
           className={s.list}
           ref={listRef}
@@ -38,7 +38,7 @@ const Slider = () => {
             </li>
           ))}
         </ul>
-        <ArrowButton direction="right" onClick={next} className={s.rightArrow} />
+        <ArrowButton direction="right" onClick={next} className={s.rightArrow} aria-label='Следующий баннер' />
       </div>
     </section>
   );

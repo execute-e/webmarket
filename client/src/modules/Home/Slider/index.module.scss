@@ -41,45 +41,6 @@
   }
 }
 
-.rightArrow,
-.leftArrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  border: rem(2) var(--color-gray) solid;
-  border-radius: 50%;
-  width: rem(50);
-  height: rem(50);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: var(--color-gray);
-  background: transparent;
-  z-index: 100;
-
-  @include mobile-l {
-    width: rem(40);
-    height: rem(40);
-    top: initial;
-    bottom: rem(0);
-    color: var(--color-blue);
-    border-color: var(--color-blue);
-
-    @include hover {
-      opacity: 0.5;
-    }
-  }
-
-  @include hover {
-    color: var(--color-blue);
-    border-color: var(--color-blue);
-  }
-
-  &:disabled {
-    opacity: 0.5;
-  }
-}
-
 .rightArrow {
   right: rem(24);
 
@@ -95,6 +56,21 @@
   @include mobile-l {
     left: 50%;
     transform: translateX(-110%);
+  }
+}
+
+.leftArrow, .rightArrow {
+  @include mobile-l {
+    width: rem(40);
+    height: rem(40);
+    top: initial;
+    bottom: rem(0);
+    color: var(--color-blue);
+    border-color: var(--color-blue);
+
+    @include hover {
+      opacity: 0.5;
+    }
   }
 }
 

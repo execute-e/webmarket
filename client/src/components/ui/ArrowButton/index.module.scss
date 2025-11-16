@@ -1,0 +1,26 @@
+@use '../../../scss/helpers' as *;
+
+.button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: rem(2) var(--color-gray) solid;
+  border-radius: 50%;
+  width: rem(50);
+  height: rem(50);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-gray);
+  background: transparent;
+  z-index: 100;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  @include mobile-l {
+    width: rem(40);
+    height: rem(40);
+  }
+}

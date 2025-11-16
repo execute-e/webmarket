@@ -63,3 +63,8 @@ html {
     flex-direction: column;
     min-height: 100vh;
 }
+
+h2, .h2 {
+    @include fluid-text(32, 20);
+    font-weight: 400;
+}
