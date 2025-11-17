@@ -31,9 +31,7 @@ const User = sequelize.define('User', {
         type: DataTypes.STRING,
         unique: true,
         allowNull: false,
-        validate: {
-            isEmail: true
-        }
+        validate: { isEmail: true }
     },
     password: {
         type: DataTypes.STRING,
@@ -66,10 +64,7 @@ const Token = sequelize.define('Token', {
     userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-            model: 'users',
-            key: 'id'
-        }
+        references: { model: 'users', key: 'id' }
     },
     refreshToken: {
         type: DataTypes.TEXT,
@@ -85,6 +80,68 @@ const Token = sequelize.define('Token', {
     timestamps: false
 });
 
+const Category = sequelize.define('Category', {
+    id: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4
+    },
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    slug: {
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: false
+    },
+    description: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    imageUrl: {
+        type: DataTypes.STRING,
+        allowNull: true
+    }
+}, {
+    tableName: 'categories'
+});
+
+const CategoryFilter = sequelize.define('CategoryFilter', {
+    id: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4
+    },
+    categoryId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        references: { model: 'categories', key: 'id' }
+    },
+    filterKey: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    filterName: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    filterType: {
+        type: DataTypes.ENUM('checkbox', 'range', 'select'),
+        defaultValue: 'checkbox'
+    },
+    values: {
+        type: DataTypes.JSONB,
+        defaultValue: []
+    },
+    order: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
+    }
+}, {
+    tableName: 'category_filters'
+});
+
 const Product = sequelize.define('Product', {
     id: {
         type: DataTypes.UUID,
@@ -96,26 +153,152 @@ const Product = sequelize.define('Product', {
         allowNull: false
     },
     description: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
+    price: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: false
+    },
+    discountPrice: {
+        type: DataTypes.DECIMAL(10, 2),
+        allowNull: true
+    },
+    inStock: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+    },
+    imageUrl: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    brand: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    isFeatured: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    },
+    sku: {
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: true
+    },
+    weight: {
+        type: DataTypes.DECIMAL(8, 2),
+        allowNull: true
+    },
+    dimensions: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
+    rating: {
+        type: DataTypes.DECIMAL(2, 1),
+        defaultValue: 0,
+        validate: {
+            min: 0,
+            max: 5
+        }
+    },
+    reviewCount: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
+    },
+    categoryId: {
+        type: DataTypes.UUID,
+        allowNull: true,
+        references: { model: 'categories', key: 'id' }
+    }
+}, {
+    tableName: 'products',
+    timestamps: true,
+    paranoid: true
+});
+
+const ProductColor = sequelize.define('ProductColor', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    productId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        references: { model: 'products', key: 'id' }
+    },
+    name: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    price: {
+    hexCode: {
+        type: DataTypes.STRING(7),
+        allowNull: true,
+        validate: {
+            is: /^#[0-9A-F]{6}$/i
+        }
+    },
+    isAvailable: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+    }
+}, {
+    tableName: 'product_colors',
+    timestamps: false
+});
+
+const ProductSpec = sequelize.define('ProductSpec', {
+    id: {
         type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    productId: {
+        type: DataTypes.UUID,
+        allowNull: false,
+        references: { model: 'products', key: 'id' }
+    },
+    key: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    value: {
+        type: DataTypes.STRING,
         allowNull: false
     }
-})
+}, {
+    tableName: 'product_specs',
+    timestamps: false
+});
 
-User.hasMany(Token, { foreignKey: 'userId', onDelete: 'CASCADE' });
-Token.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
+function setupAssociations() {
+    User.hasMany(Token, { foreignKey: 'userId', onDelete: 'CASCADE' });
+    Token.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
+
+    Category.hasMany(Product, { foreignKey: 'categoryId' });
+    Product.belongsTo(Category, { foreignKey: 'categoryId' });
+
+    Category.hasMany(CategoryFilter, { foreignKey: 'categoryId', as: 'filters' });
+    CategoryFilter.belongsTo(Category, { foreignKey: 'categoryId' });
+
+    Product.hasMany(ProductColor, { foreignKey: 'productId', onDelete: 'CASCADE' });
+    ProductColor.belongsTo(Product, { foreignKey: 'productId', onDelete: 'CASCADE' });
+
+    Product.hasMany(ProductSpec, { foreignKey: 'productId', onDelete: 'CASCADE' });
+    ProductSpec.belongsTo(Product, { foreignKey: 'productId', onDelete: 'CASCADE' });
+}
+
+setupAssociations();
 
 async function createDatabaseIfNotExists() {
     try {
         await adminSequelize.authenticate();
         console.log('Подключились к служебной БД "postgres"');
 
-        const [results] = await adminSequelize.query(`
-            SELECT 1 FROM pg_database WHERE datname = $1
-        `, { bind: [process.env.DB_NAME] });
+        const [results] = await adminSequelize.query(
+            `SELECT 1 FROM pg_database WHERE datname = $1`,
+            { bind: [process.env.DB_NAME] }
+        );
 
         if (results.length === 0) {
             console.log(`База данных "${process.env.DB_NAME}" не найдена — создаём...`);
@@ -125,7 +308,7 @@ async function createDatabaseIfNotExists() {
             console.log(`База данных "${process.env.DB_NAME}" уже существует`);
         }
     } catch (error) {
-        console.error('Ошибка при создании базы данных:', error.message);
+        console.error('Ошибка при создании БД:', error.message);
         throw error;
     } finally {
         await adminSequelize.close();
@@ -137,13 +320,17 @@ async function initializeDatabase() {
         await createDatabaseIfNotExists();
 
         await sequelize.authenticate();
-        console.log('PostgreSQL: подключение к рабочей БД установлено');
+        console.log('Подключение к рабочей БД установлено');
 
         await sequelize.sync({ alter: true });
-        console.log('Таблицы синхронизированы (users, tokens)');
+        console.log('Таблицы синхронизированы: users, tokens, products, product_colors, product_specs, categories, category_filters');
+
+        const CategoryService = require('../category/category-service');
+        await CategoryService.initializeDefaultCategories();
+        console.log('Категории инициализированы');
 
     } catch (error) {
-        console.error('Ошибка инициализации базы данных:', error.message);
+        console.error('Ошибка инициализации БД:', error.message);
         process.exit(1);
     }
 }
@@ -170,12 +357,12 @@ async function clearDatabase() {
 
         for (const table of tableNames) {
             await sequelize.query(`DROP TABLE IF EXISTS "${table}" CASCADE`);
-            console.log(`🗑Таблица "${table}" удалена`);
+            console.log(`🗑 Таблица "${table}" удалена`);
         }
 
         console.log('База данных полностью очищена!');
     } catch (error) {
-        console.error('Ошибка при очистке базы:', error.message);
+        console.error('Ошибка при очистке:', error.message);
         throw error;
     }
 }
@@ -185,15 +372,20 @@ async function closeDatabase() {
         await sequelize.close();
         console.log('Соединение с базой данных закрыто');
     } catch (error) {
-        console.error('Ошибка при закрытии соединения:', error.message);
+        console.error('Ошибка при закрытии:', error.message);
     }
 }
 
 module.exports = {
     sequelize,
+    adminSequelize,
     User,
     Token,
+    Category,
+    CategoryFilter,
     Product,
+    ProductColor,
+    ProductSpec,
     initializeDatabase,
     closeDatabase,
     clearDatabase
