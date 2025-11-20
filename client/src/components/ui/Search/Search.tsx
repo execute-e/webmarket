@@ -3,7 +3,7 @@ import s from './index.module.scss';
 
 const Search = () => {
   return (
-    <section role="search" aria-label="Поиск товаров" className={s.overlay}>
+    <div role="search" aria-label="Поиск товаров" className={s.overlay}>
       <form className={s.form} role="search" aria-labelledby="search-label">
         <fieldset className={s.fieldset}>
           <legend id="search-label" className="visually-hidden">
@@ -30,7 +30,7 @@ const Search = () => {
       <div role="region" aria-live="polite" aria-label="Результаты поиска">
         {/* Результаты поиска */}
       </div>
-    </section>
+    </div>
   );
 };
 
