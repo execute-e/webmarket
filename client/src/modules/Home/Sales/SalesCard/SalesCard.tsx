@@ -34,7 +34,9 @@ const SalesCard = ({ data }: IProps) => {
       <h3 className={s.name}>{data.name}</h3>
       <div className={s.prices}>
         <h4 className={s.currentPrice}>{data.price - data.price * (data.salePercent ?? 0)}₽</h4>
-        <s className={s.previousPrice}>{data.price}₽</s>
+        <s aria-label={`Старая цена: ${data.price} рублей`} className={s.previousPrice}>
+          {data.price}₽
+        </s>
       </div>
       <div className={s.actions}>
         <span className={data.isInStock ? s.inStock : s.notInStock}>
@@ -42,11 +44,13 @@ const SalesCard = ({ data }: IProps) => {
         </span>
         <LikeButton
           role="switch"
+          aria-checked={data.isLiked}
           aria-label={data.isLiked ? 'Убрать из избранного' : 'Добавить в избранное'}
           isLiked={data.isLiked}
+          type="button"
         />
       </div>
-      <AccentButton>В корзину</AccentButton>
+      <AccentButton type="button">В корзину</AccentButton>
     </article>
   );
 };

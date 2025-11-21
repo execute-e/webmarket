@@ -24,21 +24,19 @@ const Catalog = () => {
         <ul ref={listRef} className={s.window}>
           {CATEGORIES.map((item) => (
             <li key={item.id} className={s.item}>
-              <article>
-                <Link to="categories/" className={s.link}>
-                  <div className={s.card}>
-                    <Picture
-                      webp={item.webpSrc}
-                      fallback={item.fallbackSrc}
-                      width={200}
-                      height={200}
-                      alt={item.name}
-                      className={s.image}
-                    />
-                  </div>
-                  <span className={s.itemText}>{item.name}</span>
-                </Link>
-              </article>
+              <Link to="categories/" className={s.link}>
+                <div className={s.card}>
+                  <Picture
+                    webp={item.webpSrc}
+                    fallback={item.fallbackSrc}
+                    width={200}
+                    height={200}
+                    alt={item.name}
+                    className={s.image}
+                  />
+                </div>
+                <span className={s.itemText}>{item.name}</span>
+              </Link>
             </li>
           ))}
         </ul>
