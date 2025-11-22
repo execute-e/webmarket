@@ -15,7 +15,7 @@ const Navigation = ({ type }: IProps) => {
   const location = useLocation();
 
   const isMobile = type === 'mobile';
-  const isActive = useCallback((path: string) => location.pathname === path, [location.pathname]);
+  const isActive = useCallback((path: string) => location.pathname.includes(path), [location.pathname]);
 
   const nav = (
     <nav
@@ -26,9 +26,9 @@ const Navigation = ({ type }: IProps) => {
         {type === 'mobile' && (
           <li className={s.listItem}>
             <Link
-              to="/"
+              to="/home"
               className={`${s.link} ${isActive('/') ? s.active : ''}`}
-              aria-current={isActive('/') ? 'page' : undefined}>
+              aria-current={isActive('/home') ? 'page' : undefined}>
               <HomeIcon className={s.icon} />
               <span>Главная</span>
             </Link>

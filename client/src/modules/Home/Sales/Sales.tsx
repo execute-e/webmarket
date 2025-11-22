@@ -1,7 +1,7 @@
 import ArrowButton from '@/components/ui/ArrowButton/ArrowButton';
 import s from './index.module.scss';
-import SalesCard from './SalesCard/SalesCard';
 import { useCanScroll } from '@/hooks/useCanScroll';
+import ProductCard from '../../../components/ui/ProductCard/ProductCard';
 
 const SALES_EXAMPLE = [
   {
@@ -38,7 +38,7 @@ const SALES_EXAMPLE = [
     id: '4',
     webpSrc: null,
     fallbackSrc: null,
-    salePercent: 0.1,
+    salePercent: 0.5,
     price: 50000,
     name: 'Смартфон Apple iPhone 13 128GB',
     isInStock: true,
@@ -87,7 +87,7 @@ const Sales = () => {
           {SALES_EXAMPLE.map((item) => {
             return (
               <li key={item.id} className={s.item}>
-                <SalesCard data={item} />
+                <ProductCard data={item} />
               </li>
             );
           })}

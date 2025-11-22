@@ -1,0 +1,14 @@
+const ColumnIcon = ({className}: {className?: string}) => {
+  return (
+    <svg width="26" height="18" viewBox="0 0 26 18" fill="none" className={className} aria-hidden focusable="false" xmlns="http://www.w3.org/2000/svg">
+      <rect width="2" height="2" rx="1" fill="currentColor" />
+      <rect x="6" width="20" height="2" rx="1" fill="currentColor" />
+      <rect y="8" width="2" height="2" rx="1" fill="currentColor" />
+      <rect x="6" y="8" width="20" height="2" rx="1" fill="currentColor" />
+      <rect y="16" width="2" height="2" rx="1" fill="currentColor" />
+      <rect x="6" y="16" width="20" height="2" rx="1" fill="currentColor" />
+    </svg>
+  );
+};
+
+export default ColumnIcon;

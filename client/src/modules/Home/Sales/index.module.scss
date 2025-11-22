@@ -21,8 +21,6 @@
   display: flex;
   flex-direction: column;
   row-gap: rem(28);
-  
-  margin-bottom: 100px;
 }
 
 .overlay {
@@ -43,4 +41,5 @@
 
 .item {
   flex-shrink: 0;
+  height: 100%;
 }

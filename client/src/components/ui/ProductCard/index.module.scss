@@ -1,4 +1,4 @@
-@use '../../../../scss/helpers' as *;
+@use '../../../scss/helpers' as *;
 
 .card {
     display: flex;
@@ -8,6 +8,7 @@
 
     @include mobile-l {
         row-gap: rem(10);
+        max-width: rem(144);
     }
 }
 
@@ -15,6 +16,11 @@
     position: relative;
     display: flex;
     align-self: center;
+    min-height: rem(235);
+
+    @include mobile-l {
+        min-height: rem(138);
+    }
 }
 
 .image {

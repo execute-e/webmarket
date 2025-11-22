@@ -1,0 +1,50 @@
+@use '../../../scss/helpers' as *;
+
+.parent {
+    display: flex;
+    flex-direction: column;
+    row-gap: rem(30);
+}
+
+.header {
+    display: flex;
+    column-gap: rem(20);
+    align-items: center;
+}
+
+.extra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sort {
+    display: flex;
+    align-items: center;
+    column-gap: rem(5);
+    border: none;
+    background-color: transparent;
+    padding: 0;
+
+    @include hover {
+        color: var(--color-blue);
+    }
+}
+
+.mode {
+    display: flex;
+    align-items: center;
+    column-gap: rem(16);
+
+    &Column, &Grid {
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        display: flex;
+        color: var(--color-gray);
+
+        &.active {
+            color: var(--color-dark);
+        }
+    }
+}

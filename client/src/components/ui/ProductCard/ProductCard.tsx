@@ -1,23 +1,30 @@
 import { IProductDto } from '@/shared/api/queryClient';
-import React from 'react';
+import React, { useMemo } from 'react';
 import s from './index.module.scss';
 import AccentButton from '@/components/ui/AccentButton/AccentButton';
 import Picture from '@/utils/Picture';
 import { LikeButton } from '@/components/ui/SquareButton/SquareButton';
 
-import exampleWebp from '../../Catalog/images/phone.webp';
-import exampleFallback from '../../Catalog/images/phone.png';
+import exampleWebp from './images/example.webp';
+import exampleFallback from './images/example.jpg';
 
-type TSaleDto = Pick<
+type TProductDto = Pick<
   IProductDto,
   'id' | 'name' | 'fallbackSrc' | 'isInStock' | 'isLiked' | 'price' | 'salePercent' | 'webpSrc'
 >;
 
 interface IProps extends React.HTMLAttributes<HTMLElement> {
-  data: TSaleDto;
+  data: TProductDto;
 }
 
-const SalesCard = ({ data }: IProps) => {
+const ProductCard = ({ data }: IProps) => {
+  const currentPrice = useMemo(() => {
+    if (data.salePercent) {
+      return data.price - data.price * data.salePercent;
+    }
+    return data.price;
+  }, [data.price, data.salePercent]);
+
   return (
     <article className={s.card}>
       <div className={s.wrapper}>
@@ -29,14 +36,16 @@ const SalesCard = ({ data }: IProps) => {
           alt={data.name}
           className={s.image}
         />
-        <div className={s.sale}>-{(data.salePercent ?? 0) * 100}%</div>
+        {data.salePercent && <div className={s.sale}>-{data.salePercent * 100}%</div>}
       </div>
       <h3 className={s.name}>{data.name}</h3>
       <div className={s.prices}>
-        <h4 className={s.currentPrice}>{data.price - data.price * (data.salePercent ?? 0)}₽</h4>
-        <s aria-label={`Старая цена: ${data.price} рублей`} className={s.previousPrice}>
-          {data.price}₽
-        </s>
+        <h4 className={s.currentPrice}>{currentPrice}₽</h4>
+        {data.salePercent && (
+          <s aria-label={`Старая цена: ${data.price} рублей`} className={s.previousPrice}>
+            {data.price}₽
+          </s>
+        )}
       </div>
       <div className={s.actions}>
         <span className={data.isInStock ? s.inStock : s.notInStock}>
@@ -55,4 +64,4 @@ const SalesCard = ({ data }: IProps) => {
   );
 };
 
-export default SalesCard;
+export default ProductCard;
