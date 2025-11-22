@@ -1,4 +1,5 @@
 import Catalog from "./Catalog/Catalog";
+import Sales from "./Sales/Sales";
 import Slider from "./Slider/Slider";
 
 const Home = () => {
@@ -6,6 +7,7 @@ const Home = () => {
         <div>
             <Slider />
             <Catalog />
+            <Sales />
         </div>
     );
 };

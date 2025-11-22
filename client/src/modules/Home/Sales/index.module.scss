@@ -1,0 +1,46 @@
+@use '../../../scss/helpers' as *;
+
+.rightArrow {
+  right: rem(24);
+
+  @include mobile-l {
+    right: 0;
+  }
+}
+
+.leftArrow {
+  left: rem(24);
+
+  @include mobile-l {
+    left: 0;
+  }
+}
+
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: rem(28);
+  
+  margin-bottom: 100px;
+}
+
+.overlay {
+  position: relative;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  column-gap: rem(32);
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.item {
+  flex-shrink: 0;
+}

@@ -3,7 +3,7 @@ interface IProps {
   fallback: string;
   width: number;
   height: number;
-  alt: string;
+  alt?: string;
   className?: string;
 }
 
@@ -17,7 +17,7 @@ const Picture = ({
   ...imgProps
 }: IProps) => {
   return (
-    <picture>
+    <picture style={{display: 'contents'}}>
       <source srcSet={webp} type="image/webp" />
       <img
         src={fallback}
@@ -25,6 +25,8 @@ const Picture = ({
         height={height}
         alt={alt}
         className={className}
+        loading="lazy"
+        decoding="async"
         {...imgProps}
       />
     </picture>

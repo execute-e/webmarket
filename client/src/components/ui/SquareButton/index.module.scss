@@ -1,0 +1,18 @@
+@use '../../../scss/helpers' as *;
+
+.button {
+    background-color: white;
+    width: rem(40);
+    height: rem(40);
+    border-radius: rem(8);
+    border: none;
+    box-shadow: 0 0 rem(20) rem(0.5) var(--color-gray);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.liked {
+    color: red;
+    fill: red;
+}

@@ -1,0 +1,10 @@
+@use '../../../scss/helpers' as *;
+
+.button {
+    width: 100%;
+    background-color: var(--color-blue);
+    border: none;
+    border-radius: rem(8);
+    color: white;
+    padding: rem(14);
+}

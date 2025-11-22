@@ -1,13 +1,8 @@
 @use '../../../scss/helpers' as *;
 
 .window {
-  margin-top: rem(40);
   overflow-x: hidden;
   overflow-y: visible;
-
-  @include mobile-l {
-    margin-top: rem(10);
-  }
 }
 
 .overlay {
