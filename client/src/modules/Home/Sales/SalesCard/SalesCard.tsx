@@ -3,10 +3,10 @@ import React from 'react';
 import s from './index.module.scss';
 import AccentButton from '@/components/ui/AccentButton/AccentButton';
 import Picture from '@/utils/Picture';
+import { LikeButton } from '@/components/ui/SquareButton/SquareButton';
 
 import exampleWebp from '../../Catalog/images/phone.webp';
 import exampleFallback from '../../Catalog/images/phone.png';
-import { LikeButton } from '@/components/ui/SquareButton/SquareButton';
 
 type TSaleDto = Pick<
   IProductDto,
